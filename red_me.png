@@ -1,0 +1,14 @@
+change password type number to letter
+find:
+goto loop
+Ctrl + F
+change to goto character
+add some number
+find REM 0123456789
+...wxyz
+REM 0123456789
+edit
+...wxyzREM 0123456789
+and delete space,REM
+...wxyz0123456789
+ok
