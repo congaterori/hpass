@@ -3,6 +3,7 @@
 title login
 color a
 cls
+set /A PASS1=99999999
 set /p name=enter your username: 
 cls
 set /p password=enter your password: 
@@ -12,31 +13,33 @@ title cracking..
 echo loading...
 cls
 echo cracking...
-goto loop
+set /p hello=(number/letter)Type n to number or type l to letter: 
+IF %hello% == "n" goto loop || goto number1
 :loop
-echo %PASS%
 SET /A PASS=%PASS%+1
+echo %PASS%
 if %PASS% == %password% goto done
 if %PASS% == 999999 goto count
 if %password% == "" goto error
 goto loop
 :count
-echo %PASS2%
-SET /A PASS1=99999999
-set /A PASS2=%PASS1%-1
-if %PASS2% == %password% goto finish
-if %PASS2% == %PASS% goto loop
+set /A PASS1=%PASS1%-1
+echo %PASS1%
+if %PASS1% == %password% goto finish
+if %PASS1% == %PASS% goto loop
 if %password% == "" goto error
 goto count
+:number1
+set /p so=[how many character in password] 
+goto character
 :character
 setlocal ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
-set alfanum=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-REM 0123456789
+set alfanum=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*@"'.,:;+-_][}{)(!~`
 set /A so1=%so%-1
 set pwd=
 FOR /L %%b IN (0, 1, %so1%) DO (
 SET /A rnd_num=!RANDOM! * 62 / 32768 + 1
-for /F %%c in ('echo %%alfanum:~!rnd_num!^,1%%') do set pwd=!pwd!%%c
+for /F %%c in ('echo:%%alfanum:~!rnd_num!^,1%%') do set pwd=!pwd!%%c
 )
 
 echo:%pwd%
@@ -45,6 +48,7 @@ if %password% == "" goto error
 endlocal
 goto character
 :finish
+start C:\Windows\Media\Alarm02.wav
 echo your password is %PASS1%
 echo your real password is %password%
 echo username is %RANDOM%^|%name%^|%RANDOM%
@@ -52,6 +56,7 @@ pause
 cls
 goto start
 :done
+start C:\Windows\Media\Alarm02.wav
 echo your password is %PASS%%pwd%
 echo your real password is %password%
 echo username is %RANDOM%^|%name%^|%RANDOM%
