@@ -14,7 +14,8 @@ echo loading...
 cls
 echo cracking...
 set /p hello=(number/letter)Type n to number or type l to letter: 
-IF %hello% == "n" goto loop || goto number1
+if %hello% == n goto loop
+goto number1
 :loop
 SET /A PASS=%PASS%+1
 echo %PASS%
